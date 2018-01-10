@@ -20,7 +20,7 @@ public class TagEJB {
 	}
 
 	public TagEntity findById(int id) {
-		TypedQuery<TagEntity> q = em.createQuery("SELECT t FROM TagEntity as t WHERE t.id = :id",TagEntity.class);
+		TypedQuery<TagEntity> q = em.createQuery("SELECT t FROM TagEntity as t WHERE t.tagid = :id",TagEntity.class);
 		q.setParameter("id",id);
 		return q.getSingleResult();
 	}

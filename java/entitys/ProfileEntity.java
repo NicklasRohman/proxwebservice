@@ -12,24 +12,18 @@ public class ProfileEntity implements Serializable{
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="profileid")
 	private int id;
-	
 	@Column
 	private String email;
-	
 	@Column
 	private String password;
-	
 	@Column
 	private String name;
-	
 	@Column
 	private String bio;
-	
 	@Column
 	private String photo;
-	
 	@Column
-	double rating;
+	private double profileRating;
 	
 	@ManyToMany
 	@JoinTable(name = "profile_event",joinColumns={
@@ -87,12 +81,17 @@ public class ProfileEntity implements Serializable{
 		this.photo = photo;
 	}
 
-	public double getRating() {
-		return rating;
+
+	public double getProfileRating() {
+		return profileRating;
 	}
 
-	public void setRating(double rating) {
-		this.rating = rating;
+	public void setProfileRating(double rating) {
+		this.profileRating = rating;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	public List<EventEntity> getEventResult() {
@@ -102,6 +101,4 @@ public class ProfileEntity implements Serializable{
 	public void setEventResult(List<EventEntity> eventResult) {
 		this.eventResult = eventResult;
 	}
-
-	
 }

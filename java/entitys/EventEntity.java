@@ -14,25 +14,20 @@ public class EventEntity implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int eventid;
-
 	@Column
 	private String name;
-
 	@Column
 	private String category;
-
+	@Column
+	private Date date[];
+	@Column
+	private String location;
 	@Column
 	private double raiting;
 
-	@Column
-	private Date date[];
-
-	@Column
-	private String location;
-
+	
 	@ManyToMany(mappedBy = "eventResult")
 	private List<ProfileEntity> eventResult;
-	
 	@ManyToMany
 	@JoinTable(name="event_tag",joinColumns={
 			@JoinColumn(name="eventid",referencedColumnName="eventid")},inverseJoinColumns={
@@ -118,6 +113,4 @@ public class EventEntity implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
 }

@@ -1,29 +1,38 @@
 package dto;
 
 import java.sql.Date;
+import javax.xml.bind.annotation.*;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class EventDto {
 
+	@XmlElement(name = "eventid")
 	private int eventid;
+	@XmlElement
 	private String name;
+	@XmlElement
 	private String catagory;
+	@XmlElement
 	private Date[] date;
+	@XmlElement
 	private String location;
+	@XmlElement
 	private double raiting;
 
-	public EventDto(){}
-	
-	public EventDto(int eventid, String name, String caregory, Date[] date, String location, double raiting) {
-	this.eventid = eventid;
-	this.name = name;
-	this.catagory = caregory;
-	this.date = date;
-	this.location = location;
-	this.raiting = raiting;
-	
+	public EventDto() {
 	}
 
-	
+	public EventDto(int eventid, String name, String caregory, Date[] date, String location, double raiting) {
+		this.eventid = eventid;
+		this.name = name;
+		this.catagory = caregory;
+		this.date = date;
+		this.location = location;
+		this.raiting = raiting;
+
+	}
+
 	public int getEventid() {
 		return eventid;
 	}

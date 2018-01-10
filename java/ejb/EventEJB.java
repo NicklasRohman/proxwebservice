@@ -16,8 +16,8 @@ public class EventEJB {
 	}
 
 	public EventEntity findById(int id) {
-		TypedQuery<EventEntity> q = em.createQuery("SELECT e FROM EventEntity as e WHERE e.id = :id",EventEntity.class);
-		q.setParameter("id",id);
+		TypedQuery<EventEntity> q = em.createQuery("SELECT e FROM EventEntity as e WHERE e.eventid = :eventid",EventEntity.class);
+		q.setParameter("eventid",id);
 		return q.getSingleResult();
 	}
 
@@ -29,5 +29,4 @@ public class EventEJB {
 		EventEntity event = findById(id);
 		em.remove(event);
 	}
-	
 }

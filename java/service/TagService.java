@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import dto.TagDto;
 import ejb.TagEJB;
 import entitys.TagEntity;
+
 @RequestScoped
 @Path("tags")
 public class TagService {
@@ -24,10 +25,10 @@ public class TagService {
 	@Produces(MediaType.APPLICATION_XML)
 	public List<TagDto> getTags() {
 		List<TagDto> result = new ArrayList<TagDto>();
-		for (TagEntity Tag : tagEJB.findAll()) {
-			result.add(entToDTO(Tag));
+		for (TagEntity tag : tagEJB.findAll()) {
+			result.add(entToDTO(tag));
 		}
-		log.info("Return {} Tags", result.size());
+		log.info("Return {} tags", result.size());
 		tagEJB = null;
 		return result;
 	}
@@ -41,21 +42,33 @@ public class TagService {
 			if (tag.getId() == id) {
 				result.add(entToDTO(tag));
 			}
-			result.add(entToDTO(tag));
 		}
-		log.info("Return {} Tags", result.size());
+		log.info("Return {} tag", result.size());
 		tagEJB = null;
 		return result;
 	}
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_XML)
+	@Produces(MediaType.APPLICATION_XML)
+	public void createNewProfile(TagDto[] tagDto) {
+		TagEntity entity = new TagEntity();
+
+		for (TagDto dto : tagDto) {
+				entity.setName(dto.getName());
+			}
+		tagEJB.merge(entity);
+	}
+
 
 	@PUT
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_XML)
-	public void editTag(@PathParam("id") int id, TagDto[] TagDto) {
+	public void editTag(@PathParam("id") int id, TagDto[] tagDto) {
 		TagEntity entity = new TagEntity();
 		entity.setId(id);
 
-		for (TagDto dto : TagDto) {
+		for (TagDto dto : tagDto) {
 			if (entity.getId() == id) {
 				entity.setName(dto.getName());
 			}
@@ -75,3 +88,4 @@ public class TagService {
 		return result;
 	}
 }
+//http://localhost:8080/ProjectXWebservice/tags

@@ -1,7 +1,6 @@
 package service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -46,11 +45,26 @@ public class EventService {
 			if (event.getEventid() == id) {
 				result.add(entToDTO(event));
 			}
-			result.add(entToDTO(event));
 		}
-		log.info("Return {} events", result.size());
+		log.info("Return {} event", result.size());
 		eventEJB = null;
 		return result;
+	}
+
+	@POST
+	@Consumes(MediaType.APPLICATION_XML)
+	@Produces(MediaType.APPLICATION_XML)
+	public void createNewEvent(EventDto[] eventDto) {
+		EventEntity entity = new EventEntity();
+
+		for (EventDto dto : eventDto) {		
+		entity.setCaregory(dto.getCatagory());
+		entity.setName(dto.getName());
+		entity.setDate(dto.getDate());
+		entity.setLocation(dto.getLocation());
+		entity.setRaiting(dto.getRaiting());
+		}
+		eventEJB.merge(entity);
 	}
 
 	@PUT
@@ -85,3 +99,4 @@ public class EventService {
 		return result;
 	}
 }
+//http://localhost:8080/ProjectXWebservice/events

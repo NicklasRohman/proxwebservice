@@ -1,5 +1,6 @@
 package entitys;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -12,20 +13,19 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="tag")
-public class TagEntity {
+public class TagEntity implements Serializable{
+	private static final long serialVersionUID = 1L;
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="tagid")
 	private int tagid;
-	
 	@Column
 	private String name;
 	
 	@ManyToMany(mappedBy = "tagResult")
 	private List<EventEntity> tagResult;
 
-	public TagEntity(){
-	}
+	public TagEntity(){}
 	
 	public int getId() {
 		return tagid;

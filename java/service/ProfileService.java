@@ -1,7 +1,6 @@
 package service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -48,6 +47,8 @@ public class ProfileService {
 				result.add(entToDTO(profile));
 			}
 		}
+		log.info("Return {} profile", result.size());
+		profileEJB = null;
 		return result;
 	}
 
@@ -62,7 +63,7 @@ public class ProfileService {
 			entity.setPassword(dto.getPassword());
 			entity.setName(dto.getName());
 			entity.setBio(dto.getBio());
-			entity.setRating(dto.getRating());
+			entity.setProfileRating(dto.getProfileRating());
 		}
 		profileEJB.merge(entity);
 	}
@@ -82,7 +83,7 @@ public class ProfileService {
 				entity.setPassword(dto.getPassword());
 				entity.setName(dto.getName());
 				entity.setBio(dto.getBio());
-				entity.setRating(dto.getRating());
+				entity.setProfileRating(dto.getProfileRating());
 			}
 		}
 		profileEJB.merge(entity);
@@ -97,9 +98,9 @@ public class ProfileService {
 
 	private ProfileDto entToDTO(ProfileEntity ent) {
 		ProfileDto result = new ProfileDto(ent.getId(), ent.getEmail(), ent.getPassword(), ent.getName(), ent.getBio(),
-				ent.getRating());
+				ent.getProfileRating());
 
 		return result;
 	}
-
 }
+//http://localhost:8080/ProjectXWebservice/profiles

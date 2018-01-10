@@ -11,10 +11,8 @@ public class TagDto {
 
 	@XmlElement(name="tagid")
 	private int tagid;
-	
 	@XmlElement
 	private String name;
-	
 	@XmlElementWrapper(name = "tagResult")
 	@XmlElement(name = "tag")
 	private List<EventEntity> tagResult;

@@ -11,24 +11,18 @@ public class ProfileDto {
 
 	@XmlElement(name="profileid")
 	private int id;
-
 	@XmlElement
 	private String email;
-
 	@XmlElement
 	private String password;
-
 	@XmlElement
 	private String name;
-
 	@XmlElement
 	private String bio;
-
 	@XmlElement
 	private String photo;
-
 	@XmlElement
-	double rating;
+	private double profileRating;
 
 	@XmlElementWrapper(name = "eventResult")
 	@XmlElement(name = "event")
@@ -42,7 +36,7 @@ public class ProfileDto {
 		this.password = password;
 		this.name = name;
 		this.bio = bio;
-		this.rating = rating;
+		this.profileRating = rating;
 	}
 
 	public int getId() {
@@ -93,12 +87,12 @@ public class ProfileDto {
 		this.photo = photo;
 	}
 
-	public double getRating() {
-		return rating;
+	public double getProfileRating() {
+		return profileRating;
 	}
 
-	public void setRating(double rating) {
-		this.rating = rating;
+	public void setProfileRating(double rating) {
+		this.profileRating = rating;
 	}
 
 	public List<EventEntity> getEventResult() {
