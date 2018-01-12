@@ -47,19 +47,16 @@ public class TagService {
 		tagEJB = null;
 		return result;
 	}
-	
+
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.APPLICATION_XML)
-	public void createNewProfile(TagDto[] tagDto) {
-		TagEntity entity = new TagEntity();
+	public TagDto createNewProfile(TagDto tagDto) {
+		TagEntity entity = new TagEntity(tagDto);
 
-		for (TagDto dto : tagDto) {
-				entity.setName(dto.getName());
-			}
-		tagEJB.merge(entity);
+		entity = tagEJB.merge(entity);
+		return entToDTO(entity);
 	}
-
 
 	@PUT
 	@Path("{id}")
@@ -88,4 +85,4 @@ public class TagService {
 		return result;
 	}
 }
-//http://localhost:8080/ProjectXWebservice/tags
+// http://localhost:8080/ProjectXWebservice/tags

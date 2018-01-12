@@ -2,11 +2,13 @@ package ejb;
 
 import java.util.List;
 
+import javax.annotation.security.DeclareRoles;
 import javax.ejb.Stateless;
 import javax.persistence.*;
 import entitys.ProfileEntity;
 
 @Stateless
+@DeclareRoles({"admin"})
 public class ProfileEJB {
 	@PersistenceContext(name="projectx")
 	private EntityManager em;

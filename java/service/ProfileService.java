@@ -52,20 +52,16 @@ public class ProfileService {
 		return result;
 	}
 
+	
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.APPLICATION_XML)
-	public void createNewProfile(ProfileDto[] profileDto) {
-		ProfileEntity entity = new ProfileEntity();
+	public ProfileDto createNewProfile(ProfileDto dto) {
+		ProfileEntity entity = new ProfileEntity(dto);
 
-		for (ProfileDto dto : profileDto) {
-			entity.setEmail(dto.getEmail());
-			entity.setPassword(dto.getPassword());
-			entity.setName(dto.getName());
-			entity.setBio(dto.getBio());
-			entity.setProfileRating(dto.getProfileRating());
-		}
-		profileEJB.merge(entity);
+		entity = profileEJB.merge(entity); 
+		return entToDTO(entity);
+		
 	}
 
 	@PUT

@@ -1,6 +1,5 @@
 package dto;
 
-import java.sql.Date;
 import javax.xml.bind.annotation.*;
 
 @XmlRootElement
@@ -14,7 +13,7 @@ public class EventDto {
 	@XmlElement
 	private String catagory;
 	@XmlElement
-	private Date[] date;
+	private String date;
 	@XmlElement
 	private String location;
 	@XmlElement
@@ -23,7 +22,7 @@ public class EventDto {
 	public EventDto() {
 	}
 
-	public EventDto(int eventid, String name, String caregory, Date[] date, String location, double raiting) {
+	public EventDto(int eventid, String name, String caregory, String date, String location, double raiting) {
 		this.eventid = eventid;
 		this.name = name;
 		this.catagory = caregory;
@@ -57,11 +56,11 @@ public class EventDto {
 		this.catagory = catagory;
 	}
 
-	public Date[] getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date[] date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 

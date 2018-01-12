@@ -11,22 +11,31 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import dto.TagDto;
+
 @Entity
-@Table(name="tag")
-public class TagEntity implements Serializable{
+@Table(name = "tag")
+public class TagEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="tagid")
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "tagid")
 	private int tagid;
 	@Column
 	private String name;
-	
+
 	@ManyToMany(mappedBy = "tagResult")
 	private List<EventEntity> tagResult;
 
-	public TagEntity(){}
-	
+	public TagEntity() {
+	}
+
+	public TagEntity(TagDto dto) {
+		this.tagid = dto.getId();
+		this.name = dto.getName();
+	}
+
 	public int getId() {
 		return tagid;
 	}
@@ -50,5 +59,5 @@ public class TagEntity implements Serializable{
 	public void setTagResult(List<EventEntity> tagResult) {
 		this.tagResult = tagResult;
 	}
-	
+
 }

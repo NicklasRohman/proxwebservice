@@ -1,10 +1,11 @@
 package entitys;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.*;
+
+import dto.EventDto;
 
 @Entity
 @Table(name="event")
@@ -19,15 +20,15 @@ public class EventEntity implements Serializable{
 	@Column
 	private String category;
 	@Column
-	private Date date[];
+	private String date;
 	@Column
 	private String location;
 	@Column
 	private double raiting;
 
-	
 	@ManyToMany(mappedBy = "eventResult")
 	private List<ProfileEntity> eventResult;
+
 	@ManyToMany
 	@JoinTable(name="event_tag",joinColumns={
 			@JoinColumn(name="eventid",referencedColumnName="eventid")},inverseJoinColumns={
@@ -36,15 +37,15 @@ public class EventEntity implements Serializable{
 
 	public EventEntity(){}
 	
-		public EventEntity(int eventid, String name, String category, Date[] date, String location, double raiting) {
-			this.eventid = eventid;
-			this.name = name;
-			this.category = category;
-			this.date = date;
-			this.location = location;
-			this.raiting = raiting;
-			
-			}
+	public EventEntity(EventDto dto) {
+		this.eventid = dto.getEventid();
+		this.name = dto.getName();
+		this.category = dto.getCatagory();
+		this.date = dto.getDate();
+		this.location = dto.getLocation();
+		this.raiting = dto.getRaiting();
+		
+		}
 
 	public int getEventid() {
 		return eventid;
@@ -78,11 +79,11 @@ public class EventEntity implements Serializable{
 		this.raiting = raiting;
 	}
 
-	public Date[] getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date[] date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 

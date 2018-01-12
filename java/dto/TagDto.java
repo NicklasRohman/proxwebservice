@@ -3,7 +3,6 @@ package dto;
 import java.util.List;
 
 import javax.xml.bind.annotation.*;
-import entitys.EventEntity;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -13,9 +12,10 @@ public class TagDto {
 	private int tagid;
 	@XmlElement
 	private String name;
+	
 	@XmlElementWrapper(name = "tagResult")
 	@XmlElement(name = "tag")
-	private List<EventEntity> tagResult;
+	private List<EventDto> tagResult;
 
 	public TagDto(){}
 	
@@ -40,11 +40,11 @@ public class TagDto {
 		this.name = name;
 	}
 
-	public List<EventEntity> getTagResult() {
+	public List<EventDto> getTagResult() {
 		return tagResult;
 	}
 
-	public void setTagResult(List<EventEntity> tagResult) {
+	public void setTagResult(List<EventDto> tagResult) {
 		this.tagResult = tagResult;
 	}
 	

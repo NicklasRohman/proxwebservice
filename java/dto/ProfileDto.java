@@ -2,7 +2,6 @@ package dto;
 
 import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
-import entitys.EventEntity;
 import javax.xml.bind.annotation.*;
 
 @XmlRootElement
@@ -26,7 +25,7 @@ public class ProfileDto {
 
 	@XmlElementWrapper(name = "eventResult")
 	@XmlElement(name = "event")
-	private List<EventEntity> eventResult;
+	private List<EventDto> eventResult;
 
 	public ProfileDto(){}
 	
@@ -95,11 +94,11 @@ public class ProfileDto {
 		this.profileRating = rating;
 	}
 
-	public List<EventEntity> getEventResult() {
+	public List<EventDto> getEventResult() {
 		return eventResult;
 	}
 
-	public void setEventResult(List<EventEntity> eventResult) {
+	public void setEventResult(List<EventDto> eventResult) {
 		this.eventResult = eventResult;
 	}
 

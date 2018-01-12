@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;
 
+import dto.ProfileDto;
+
 @Entity
 @Table(name="profile")
 public class ProfileEntity implements Serializable{
@@ -32,6 +34,16 @@ public class ProfileEntity implements Serializable{
 	private List<EventEntity>eventResult;
 
 	public ProfileEntity(){}
+	
+	public ProfileEntity(ProfileDto dto){
+		this.email = dto.getEmail();
+		this.password = dto.getPassword();
+		this.name= dto.getName();
+		this.bio=dto.getBio();
+		this.photo= dto.getPhoto();
+		this.profileRating=dto.getProfileRating();
+	
+	}
 	
 	public int getId() {
 		return id;
@@ -80,7 +92,6 @@ public class ProfileEntity implements Serializable{
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
-
 
 	public double getProfileRating() {
 		return profileRating;

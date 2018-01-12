@@ -9,7 +9,6 @@ import javax.ws.rs.core.MediaType;
 import org.slf4j.Logger;
 import dto.EventDto;
 import ejb.EventEJB;
-import ejb.ProfileEJB;
 import entitys.EventEntity;
 
 @RequestScoped
@@ -19,8 +18,6 @@ public class EventService {
 	@Inject
 	private Logger log;
 
-	@EJB
-	private ProfileEJB profileEJB;
 	@EJB
 	private EventEJB eventEJB;
 
@@ -54,17 +51,12 @@ public class EventService {
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.APPLICATION_XML)
-	public void createNewEvent(EventDto[] eventDto) {
-		EventEntity entity = new EventEntity();
+	public EventDto createNewEvent(EventDto dto) {
+		EventEntity entity = new EventEntity(dto);
 
-		for (EventDto dto : eventDto) {		
-		entity.setCaregory(dto.getCatagory());
-		entity.setName(dto.getName());
-		entity.setDate(dto.getDate());
-		entity.setLocation(dto.getLocation());
-		entity.setRaiting(dto.getRaiting());
-		}
-		eventEJB.merge(entity);
+		entity = eventEJB.merge(entity);
+		return entToDTO(entity);
+
 	}
 
 	@PUT
@@ -99,4 +91,4 @@ public class EventService {
 		return result;
 	}
 }
-//http://localhost:8080/ProjectXWebservice/events
+// http://localhost:8080/ProjectXWebservice/events
