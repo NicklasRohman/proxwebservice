@@ -15,22 +15,25 @@ public class TagEJB {
 	@PersistenceContext(name="projectx")
 	private EntityManager em;
 	
-	
+//	@RolesAllowed({"admin"})
 	public List<TagEntity> findAll() {
 		TypedQuery<TagEntity> q = em.createQuery("SELECT t FROM TagEntity as t",TagEntity.class);
 		return q.getResultList();
 	}
 
+//	@RolesAllowed({"admin"})
 	public TagEntity findById(int id) {
 		TypedQuery<TagEntity> q = em.createQuery("SELECT t FROM TagEntity as t WHERE t.tagid = :id",TagEntity.class);
 		q.setParameter("id",id);
 		return q.getSingleResult();
 	}
 
+//	@RolesAllowed({"admin"})
 	public TagEntity merge(TagEntity event){
 		return em.merge(event);
 	}
 	
+//	@RolesAllowed({"admin"})
 	public void delete(int id){
 		TagEntity event = findById(id);
 		em.remove(event);

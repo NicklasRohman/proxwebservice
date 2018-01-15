@@ -82,7 +82,8 @@ public class EventService {
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_XML)
 	public void deleteEvent(@PathParam("id") int id) {
-		eventEJB.delete(id);
+			eventEJB.delete(id);			
+		
 	}
 
 	private EventDto entToDTO(EventEntity event) {

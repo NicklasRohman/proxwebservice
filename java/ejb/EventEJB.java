@@ -6,10 +6,13 @@ import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.*;
+
+import org.eclipse.persistence.internal.libraries.asm.tree.TryCatchBlockNode;
+
 import entitys.EventEntity;
 
 @Stateless
-@DeclareRoles({"admin","user"})
+@DeclareRoles({"admin","users"})
 public class EventEJB {
 	@PersistenceContext(name="projectx")
 	private EntityManager em;
@@ -31,6 +34,7 @@ public class EventEJB {
 	public EventEntity merge(EventEntity event){
 		return em.merge(event);
 	}
+	
 	
 //	@RolesAllowed({"admin"})
 	public void delete(int id){
