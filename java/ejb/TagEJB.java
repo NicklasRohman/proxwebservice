@@ -10,7 +10,7 @@ import javax.persistence.TypedQuery;
 import entitys.TagEntity;
 
 @Stateless
-@DeclareRoles({"admin"})
+//@DeclareRoles({"admin"})
 public class TagEJB {
 	@PersistenceContext(name="projectx")
 	private EntityManager em;

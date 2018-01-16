@@ -8,7 +8,7 @@ import javax.persistence.*;
 import entitys.ProfileEntity;
 
 @Stateless
-@DeclareRoles({"admin"})
+//@DeclareRoles({"admin"})
 public class ProfileEJB {
 	@PersistenceContext(name="projectx")
 	private EntityManager em;
