@@ -12,7 +12,7 @@ import org.eclipse.persistence.internal.libraries.asm.tree.TryCatchBlockNode;
 import entitys.EventEntity;
 
 @Stateless
-@DeclareRoles({"admin","users"})
+//@DeclareRoles({"admin","users"})
 public class EventEJB {
 	@PersistenceContext(name="projectx")
 	private EntityManager em;

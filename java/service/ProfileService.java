@@ -40,10 +40,10 @@ public class ProfileService {
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_XML)
-	public List<ProfileDto> getProfile(@PathParam("id") int id) {
+	public List<ProfileDto> getProfile(@PathParam("id") String id) {
 		List<ProfileDto> result = new ArrayList<ProfileDto>();
 		for (ProfileEntity profile : profileEJB.findAll()) {
-			if (profile.getId()==id) {
+			if (profile.getEmails().equalsIgnoreCase(id)) {
 				result.add(entToDTO(profile));
 			}
 		}
@@ -58,8 +58,12 @@ public class ProfileService {
 	@Produces(MediaType.APPLICATION_XML)
 	public ProfileDto createNewProfile(ProfileDto dto) {
 		ProfileEntity entity = new ProfileEntity(dto);
-
-		entity = profileEJB.merge(entity); 
+		for (ProfileEntity profile : profileEJB.findAll()) {
+			if (!profile.getEmails().equalsIgnoreCase(dto.getEmails())) {
+				entity = profileEJB.merge(entity); 		
+			}
+		}
+		
 		return entToDTO(entity);
 		
 	}
@@ -68,14 +72,12 @@ public class ProfileService {
 	@Path("{id}")
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.APPLICATION_XML)
-	public void editProfile(@PathParam("id") int id, ProfileDto[] profileDto) {
+	public void editProfile(@PathParam("id") String id, ProfileDto[] profileDto) {
 		ProfileEntity entity = new ProfileEntity();
-		entity.setId(id);
+		entity.setEmails(id);
 
 		for (ProfileDto dto : profileDto) {
-			if (entity.getId() == id) {
-
-				entity.setEmail(dto.getEmail());
+			if (entity.getEmails().equalsIgnoreCase(id)) {
 				entity.setPassword(dto.getPassword());
 				entity.setName(dto.getName());
 				entity.setBio(dto.getBio());
@@ -88,12 +90,12 @@ public class ProfileService {
 	@DELETE
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_XML)
-	public void deleteProfile(@PathParam("id") int id) {
+	public void deleteProfile(@PathParam("id") String id) {
 		profileEJB.delete(id);
 	}
 
 	private ProfileDto entToDTO(ProfileEntity ent) {
-		ProfileDto result = new ProfileDto(ent.getId(), ent.getEmail(), ent.getPassword(), ent.getName(), ent.getBio(),
+		ProfileDto result = new ProfileDto(ent.getEmails(), ent.getPassword(), ent.getName(), ent.getBio(),
 				ent.getProfileRating());
 
 		return result;

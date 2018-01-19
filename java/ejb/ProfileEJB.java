@@ -2,7 +2,6 @@ package ejb;
 
 import java.util.List;
 
-import javax.annotation.security.DeclareRoles;
 import javax.ejb.Stateless;
 import javax.persistence.*;
 import entitys.ProfileEntity;
@@ -20,8 +19,8 @@ public class ProfileEJB {
 	}
 	
 //	@RolesAllowed({"admin"})
-	public ProfileEntity findById(int id){
-		TypedQuery<ProfileEntity> q = em.createQuery("SELECT p FROM ProfileEntity AS p WHERE p.id = :id", ProfileEntity.class);
+	public ProfileEntity findById(String id){
+		TypedQuery<ProfileEntity> q = em.createQuery("SELECT p FROM ProfileEntity AS p WHERE p.emails = :id", ProfileEntity.class);
 		q.setParameter("id", id);
 		return q.getSingleResult();
 	}
@@ -32,8 +31,9 @@ public class ProfileEJB {
 	}
 	
 //	@RolesAllowed({"admin"})
-	public void delete(int id){
+	public void delete(String id){
 		ProfileEntity profile = findById(id);
+		System.out.println(profile.getEventResult());
 		em.remove(profile);
 	}
 }

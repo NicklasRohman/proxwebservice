@@ -8,10 +8,8 @@ import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ProfileDto {
 
-	@XmlElement(name="profileid")
-	private int id;
-	@XmlElement
-	private String email;
+	@XmlElement(name ="emails")
+	private String emails;
 	@XmlElement
 	private String password;
 	@XmlElement
@@ -22,6 +20,10 @@ public class ProfileDto {
 	private String photo;
 	@XmlElement
 	private double profileRating;
+	
+	@XmlElementWrapper(name = "roles")
+	@XmlElement(name = "profile")
+	private List<RoleDto> roleResult;
 
 	@XmlElementWrapper(name = "eventResult")
 	@XmlElement(name = "event")
@@ -29,29 +31,20 @@ public class ProfileDto {
 
 	public ProfileDto(){}
 	
-	public ProfileDto(int id, String email, String password, String name, String bio, double rating) {
-		this.id = id;
-		this.email = email;
+	public ProfileDto(String emails, String password, String name, String bio, double rating) {
+		this.emails = emails;
 		this.password = password;
 		this.name = name;
 		this.bio = bio;
 		this.profileRating = rating;
 	}
 
-	public int getId() {
-		return id;
+	public String getEmails() {
+		return emails;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmails(String emails) {
+		this.emails = emails;
 	}
 
 	public String getPassword() {
@@ -100,6 +93,14 @@ public class ProfileDto {
 
 	public void setEventResult(List<EventDto> eventResult) {
 		this.eventResult = eventResult;
+	}
+
+	public List<RoleDto> getRoleResult() {
+		return roleResult;
+	}
+
+	public void setRoleResult(List<RoleDto> roleResult) {
+		this.roleResult = roleResult;
 	}
 
 }

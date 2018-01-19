@@ -11,11 +11,8 @@ import dto.ProfileDto;
 public class ProfileEntity implements Serializable{
 	private static final long serialVersionUID = 1L;
 
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="profileid")
-	private int id;
-	@Column
-	private String email;
+	@Id 
+	private String emails;
 	@Column
 	private String password;
 	@Column
@@ -28,15 +25,21 @@ public class ProfileEntity implements Serializable{
 	private double profileRating;
 	
 	@ManyToMany
+	@JoinTable(name="roles_profile",joinColumns={
+			@JoinColumn(name="emails",referencedColumnName="emails")}, inverseJoinColumns={
+					@JoinColumn(name="rolename",referencedColumnName="rolename")})
+	private List<Role>roles;
+	
+	@ManyToMany
 	@JoinTable(name = "profile_event",joinColumns={
-			@JoinColumn(name="profileid",referencedColumnName = "profileid")}, inverseJoinColumns = {
+			@JoinColumn(name="emails",referencedColumnName = "emails")}, inverseJoinColumns = {
 					@JoinColumn(name="eventid",referencedColumnName="eventid")})
 	private List<EventEntity>eventResult;
 
 	public ProfileEntity(){}
 	
 	public ProfileEntity(ProfileDto dto){
-		this.email = dto.getEmail();
+		this.emails = dto.getEmails();
 		this.password = dto.getPassword();
 		this.name= dto.getName();
 		this.bio=dto.getBio();
@@ -44,21 +47,22 @@ public class ProfileEntity implements Serializable{
 		this.profileRating=dto.getProfileRating();
 	
 	}
+
 	
-	public int getId() {
-		return id;
+	public List<Role> getRoles() {
+		return roles;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getEmails() {
+		return emails;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmails(String emails) {
+		this.emails = emails;
 	}
 
 	public String getPassword() {
