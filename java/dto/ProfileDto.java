@@ -2,6 +2,7 @@ package dto;
 
 import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
+
 import javax.xml.bind.annotation.*;
 
 @XmlRootElement
@@ -16,13 +17,13 @@ public class ProfileDto {
 	private String name;
 	@XmlElement
 	private String bio;
-	@XmlElement
-	private String photo;
-	@XmlElement
-	private double profileRating;
-	
+//	@XmlElement
+//	private String photo;
+//	@XmlElement
+//	private double profileRating;
+
 	@XmlElementWrapper(name = "roles")
-	@XmlElement(name = "profile")
+	@XmlElement(name = "role")
 	private List<RoleDto> roleResult;
 
 	@XmlElementWrapper(name = "eventResult")
@@ -30,13 +31,13 @@ public class ProfileDto {
 	private List<EventDto> eventResult;
 
 	public ProfileDto(){}
-	
-	public ProfileDto(String emails, String password, String name, String bio, double rating) {
+
+	public ProfileDto(String emails, String password, String name, String bio, List<RoleDto> roles) {
 		this.emails = emails;
 		this.password = password;
 		this.name = name;
 		this.bio = bio;
-		this.profileRating = rating;
+		this.roleResult = roles;
 	}
 
 	public String getEmails() {
@@ -71,21 +72,21 @@ public class ProfileDto {
 		this.bio = bio;
 	}
 
-	public String getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
-
-	public double getProfileRating() {
-		return profileRating;
-	}
-
-	public void setProfileRating(double rating) {
-		this.profileRating = rating;
-	}
+//	public String getPhoto() {
+//		return photo;
+//	}
+//
+//	public void setPhoto(String photo) {
+//		this.photo = photo;
+//	}
+//
+//	public double getProfileRating() {
+//		return profileRating;
+//	}
+//
+//	public void setProfileRating(double rating) {
+//		this.profileRating = rating;
+//	}
 
 	public List<EventDto> getEventResult() {
 		return eventResult;
@@ -99,8 +100,8 @@ public class ProfileDto {
 		return roleResult;
 	}
 
-	public void setRoleResult(List<RoleDto> roleResult) {
-		this.roleResult = roleResult;
+	public void setRoleResult(List<RoleDto> roles) {
+		this.roleResult = roles;
 	}
 
 }

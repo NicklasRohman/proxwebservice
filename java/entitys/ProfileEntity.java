@@ -19,16 +19,17 @@ public class ProfileEntity implements Serializable{
 	private String name;
 	@Column
 	private String bio;
-	@Column
-	private String photo;
-	@Column
-	private double profileRating;
+//	@Column
+//	private String photo;
+//	@Column
+//	private double profileRating;
 	
 	@ManyToMany
 	@JoinTable(name="roles_profile",joinColumns={
 			@JoinColumn(name="emails",referencedColumnName="emails")}, inverseJoinColumns={
 					@JoinColumn(name="rolename",referencedColumnName="rolename")})
-	private List<Role>roles;
+	private List<RoleEntity>roles;
+
 	
 	@ManyToMany
 	@JoinTable(name = "profile_event",joinColumns={
@@ -43,17 +44,14 @@ public class ProfileEntity implements Serializable{
 		this.password = dto.getPassword();
 		this.name= dto.getName();
 		this.bio=dto.getBio();
-		this.photo= dto.getPhoto();
-		this.profileRating=dto.getProfileRating();
-	
 	}
 
 	
-	public List<Role> getRoles() {
+	public List<RoleEntity> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(List<Role> roles) {
+	public void setRoles(List<RoleEntity> roles) {
 		this.roles = roles;
 	}
 
@@ -89,21 +87,21 @@ public class ProfileEntity implements Serializable{
 		this.bio = bio;
 	}
 
-	public String getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
-
-	public double getProfileRating() {
-		return profileRating;
-	}
-
-	public void setProfileRating(double rating) {
-		this.profileRating = rating;
-	}
+//	public String getPhoto() {
+//		return photo;
+//	}
+//
+//	public void setPhoto(String photo) {
+//		this.photo = photo;
+//	}
+//
+//	public double getProfileRating() {
+//		return profileRating;
+//	}
+//
+//	public void setProfileRating(double rating) {
+//		this.profileRating = rating;
+//	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;

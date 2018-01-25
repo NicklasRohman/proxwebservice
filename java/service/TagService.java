@@ -28,7 +28,7 @@ public class TagService {
 		for (TagEntity tag : tagEJB.findAll()) {
 			result.add(entToDTO(tag));
 		}
-		log.info("Return {} tags", result.size());
+	//	log.info("Return {} tags", result.size());
 		tagEJB = null;
 		return result;
 	}
@@ -43,7 +43,7 @@ public class TagService {
 				result.add(entToDTO(tag));
 			}
 		}
-		log.info("Return {} tag", result.size());
+		//log.info("Return {} tag", result.size());
 		tagEJB = null;
 		return result;
 	}

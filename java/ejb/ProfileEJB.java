@@ -33,7 +33,6 @@ public class ProfileEJB {
 //	@RolesAllowed({"admin"})
 	public void delete(String id){
 		ProfileEntity profile = findById(id);
-		System.out.println(profile.getEventResult());
 		em.remove(profile);
 	}
 }

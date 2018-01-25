@@ -10,10 +10,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class RoleDto {
 
 	
-	@XmlElement(name = "groupname")
+	@XmlElement(name = "roleName")
 	private String rolename;
-	@XmlElement
-	private String emails;
+
+	public RoleDto() {}
+	
+	public RoleDto(String rolename) {
+	this.rolename = rolename;	
+	}
 	
 	public String getRolename() {
 		return rolename;
@@ -21,12 +25,5 @@ public class RoleDto {
 	public void setRolename(String rolename) {
 		this.rolename = rolename;
 	}
-	public String getEmails() {
-		return emails;
-	}
-	public void setEmails(String emails) {
-		this.emails = emails;
-	}
-	
 	
 }

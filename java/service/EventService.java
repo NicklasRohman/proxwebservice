@@ -28,7 +28,7 @@ public class EventService {
 		for (EventEntity event : eventEJB.findAll()) {
 			result.add(entToDTO(event));
 		}
-		log.info("Return {} events", result.size());
+//		log.info("Return {} events", result.size());
 		eventEJB = null;
 		return result;
 	}
@@ -43,7 +43,7 @@ public class EventService {
 				result.add(entToDTO(event));
 			}
 		}
-		log.info("Return {} event", result.size());
+	//	log.info("Return {} event", result.size());
 		eventEJB = null;
 		return result;
 	}
