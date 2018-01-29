@@ -12,6 +12,10 @@ public class RoleEntity {
 	public RoleEntity() {
 	}
 
+	public RoleEntity(String rolename) {
+		this.rolename = rolename;
+	}
+
 	public String getRolename() {
 		return rolename;
 	}

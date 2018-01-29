@@ -6,6 +6,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 import org.slf4j.Logger;
 import dto.ProfileDto;
 import dto.RoleDto;
@@ -60,16 +62,16 @@ public class ProfileService {
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.APPLICATION_XML)
-	public ProfileDto createNewProfile(ProfileDto dto) {
+	public Response createNewProfile(ProfileDto dto) {
 		ProfileEntity entity = new ProfileEntity(dto);
 		for (ProfileEntity profile : profileEJB.findAll()) {
-			if (!profile.getEmails().equalsIgnoreCase(dto.getEmails())) {
-
-				entity = profileEJB.merge(entity);
+			if (profile.getEmails().equalsIgnoreCase(dto.getEmails())) {
+				return Response.status(400).build();
 			}
 		}
+		entity = profileEJB.merge(entity);
 
-		return entToDTO(entity);
+		return Response.ok().build();
 
 	}
 
@@ -101,6 +103,8 @@ public class ProfileService {
 		profileEJB.delete(id);
 	}
 
+	
+	
 	private ProfileDto entToDTO(ProfileEntity ent) {
 		List<RoleDto> roles = new ArrayList<>();
 		for (RoleEntity r : ent.getRoles()) {

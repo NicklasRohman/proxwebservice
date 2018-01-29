@@ -70,7 +70,7 @@ public class RoleService {
 	}
 
 	private RoleDto entToDTO(RoleEntity role) {
-		RoleDto result = new RoleDto();
+		RoleDto result = new RoleDto(role.getRolename());
 		return result;
 	}
 }

@@ -5,6 +5,7 @@ import java.util.*;
 import javax.persistence.*;
 
 import dto.ProfileDto;
+import dto.RoleDto;
 
 @Entity
 @Table(name="profile")
@@ -35,10 +36,15 @@ public class ProfileEntity implements Serializable{
 	public ProfileEntity(){}
 	
 	public ProfileEntity(ProfileDto dto){
+		
 		this.emails = dto.getEmails();
 		this.password = dto.getPassword();
 		this.name= dto.getName();
 		this.bio=dto.getBio();
+		this.roles = new ArrayList<>();
+		for (RoleDto r : dto.getRoleResult()) {
+			roles.add(new RoleEntity(r.getRolename()));
+		}
 	}
 
 	
