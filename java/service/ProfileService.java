@@ -104,11 +104,12 @@ public class ProfileService {
 	private ProfileDto entToDTO(ProfileEntity ent) {
 		List<RoleDto> roles = new ArrayList<>();
 		for (RoleEntity r : ent.getRoles()) {
-			roles.add(new RoleDto(r.getRolename()));
+			roles.add(new RoleDto(r.getRolename().toString()));
 		}
 		ProfileDto result = new ProfileDto(ent.getEmails(), ent.getPassword(), ent.getName(), ent.getBio(), roles);
 
 		return result;
 	}
+	
 }
 // http://localhost:8080/ProjectXWebservice/profiles

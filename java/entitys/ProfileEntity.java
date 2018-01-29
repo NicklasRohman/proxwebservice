@@ -19,17 +19,12 @@ public class ProfileEntity implements Serializable{
 	private String name;
 	@Column
 	private String bio;
-//	@Column
-//	private String photo;
-//	@Column
-//	private double profileRating;
-	
+
 	@ManyToMany
 	@JoinTable(name="roles_profile",joinColumns={
 			@JoinColumn(name="emails",referencedColumnName="emails")}, inverseJoinColumns={
 					@JoinColumn(name="rolename",referencedColumnName="rolename")})
 	private List<RoleEntity>roles;
-
 	
 	@ManyToMany
 	@JoinTable(name = "profile_event",joinColumns={
